@@ -13,39 +13,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'users';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'gender'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
+    protected $fillable = ['first_name', 'last_name', 'email', 'password', 'gender', 'role'];
     protected $hidden = ['password'];
+    protected $appends = ['fullname'];
 
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
+
+    public function getFullnameAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

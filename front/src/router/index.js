@@ -2,10 +2,14 @@
 import Vue from 'vue'
 import store from '@/store'
 import VueRouter from 'vue-router'
-import routes from './routes'
+import general from './general'
+import users from './users'
 
 Vue.use(VueRouter)
 
+var allRoutes = []
+allRoutes = allRoutes.concat(general, users)
+const routes = allRoutes
 const router = new VueRouter({
     mode: 'history',
     routes

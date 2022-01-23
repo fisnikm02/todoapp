@@ -1,7 +1,8 @@
 // Import Modules
 import error404 from '@/modules/Error404'
 import login from '@/modules/Login'
-import dashboard from '@/modules/Dashboard'
+import register from '@/modules/Register'
+import dashboard from '@/modules/Admin/Dashboard'
 
 export default [
     // Home Page
@@ -12,6 +13,7 @@ export default [
 
     // Auth
     { path: '/login', name: 'login', component: login, meta: { guest: true } },
+    { path: '/register', name: 'register', component: register, meta: { guest: true } },
 
     // Admin
     { path: '/admin/dashboard', name: 'admin.dashboard', component: dashboard, meta: { auth: true } },

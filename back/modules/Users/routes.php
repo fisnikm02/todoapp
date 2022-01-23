@@ -5,7 +5,7 @@ $router = $this->app['router'];
 
 // Auth
 $router->post('/login', 'LoginController@login');
-$router->post('/register', 'RegisterController@register');
+$router->post('/register', 'LoginController@register');
 
 // Users
 $router->group(['middleware' => 'auth'], function () use ($router) {

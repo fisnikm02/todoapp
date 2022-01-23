@@ -1,0 +1,40 @@
+<adminLayout v-bind:activeMenu="'adminDashboard'">
+    <div>
+        <div class="row d-flex justify-content-between align-items-center">
+            <h3 class="col-3">Users</h3>
+             
+            <div class="col-5 p-2 m-2 d-flex align-items-center justify-content-end">
+                <div class="d-flex mr-2">
+                    <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
+                    <button class="btn btn-primary" @click="search">Search</button>
+                </div>
+                <button class="btn btn-warning" @click="toggleModalNew">Add User</button>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="user in users">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.fullname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.gender }}</td>
+                    <td>{{ user.role }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <add-modal v-if="showAddModal" @toggleModal="toggleModalNew"/>
+</adminLayout>

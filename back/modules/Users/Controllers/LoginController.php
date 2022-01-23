@@ -3,8 +3,10 @@
 namespace Modules\Users\Controllers;
 
 use App\Http\Controller;
+use Modules\Users\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Modules\Users\Requests\LoginRequest;
+use Modules\Users\Requests\RegisterRequest;
 
 class LoginController extends Controller
 {
@@ -33,5 +35,16 @@ class LoginController extends Controller
 
         // Final Response
         return $this->response($data);
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        $register = new User;
+        $register->fill($request->all());
+        $register->role = 'user';
+        $register->save();
+
+        // Final Response
+        return $this->response($register);
     }
 }

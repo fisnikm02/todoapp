@@ -1,0 +1,17 @@
+.sidebar {
+    background-color: rgb(48, 48, 48);
+    height: 100vh;
+}
+.sidebar nav li {
+    list-style:none;
+    padding:10px;
+    padding-left: 20px;
+}
+.sidebar nav li a {
+    color:white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.modal {
+    display: block;
+}
