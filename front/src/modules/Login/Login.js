@@ -31,8 +31,10 @@ export default {
         .post(this.$backendUrl + "/login", self.loginData)
         .then((response) => {
           self.$store.commit("LOGGED_USER", response.data);
-
-          self.$router.push({ name: "admin.dashboard" });
+          if(response.data.role == 'admin')
+            self.$router.push({ name: "admin.dashboard" });
+          else 
+            self.$router.push({ name: "user.dashboard" });
         })
         .catch((error) => {
           try {

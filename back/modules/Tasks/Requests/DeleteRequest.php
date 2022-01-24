@@ -24,8 +24,7 @@ class DeleteRequest extends ApiRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
+            'id' => 'required|exists:tasks,id',
         ];
     }
 }

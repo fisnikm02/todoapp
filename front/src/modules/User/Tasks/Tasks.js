@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       searchInput: "",
-      users: [],
+      tasks: [],
       row: [],
       showAddModal: false,
       showEditModal: false
@@ -31,11 +31,11 @@ export default {
 
       self.users = [];
       
-      let url = this.$backendUrl + '/users?page=' + page + ((search != '') ? '&search=' + search : '')
+      let url = this.$backendUrl + '/tasks?page=' + page + ((search != '') ? '&search=' + search : '')
       self.$http
         .get(url)
         .then((res) => {
-          self.users = res.data.data;
+          self.tasks = res.data.data;
         })
         .catch((error) => {
           try {

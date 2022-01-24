@@ -24,8 +24,9 @@ class UpdateRequest extends ApiRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
+            'id' => 'required|exists:tasks,id',
+            'name' => 'required|max:100',
+            'image' => 'nullable|mimes:jpg,png'
         ];
     }
 }

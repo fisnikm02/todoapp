@@ -24,8 +24,8 @@ class AddRequest extends ApiRequest
     public function rules()
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
+            'name' => 'required|max:100',
+            'image' => 'nullable|mimes:jpg,png'
         ];
     }
 }

@@ -41,7 +41,15 @@ router.beforeEach((to, from, next) => {
 
     // Auth
     if (to.meta.auth) {
-        if (loggedUser)
+        if (loggedUser && loggedUser.role == 'admin')
+            return next()
+        else
+            return redirectToRoute('login')
+    }
+
+     // User
+     if (to.meta.auth_user) {
+        if (loggedUser && loggedUser.role == 'user')
             return next()
         else
             return redirectToRoute('login')
