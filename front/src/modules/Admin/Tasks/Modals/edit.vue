@@ -100,7 +100,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.row);
   },
   methods: {
     add: function () {

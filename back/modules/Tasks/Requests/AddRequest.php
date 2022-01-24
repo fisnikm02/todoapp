@@ -25,7 +25,8 @@ class AddRequest extends ApiRequest
     {
         return [
             'name' => 'required|max:100',
-            'image' => 'nullable|mimes:jpg,png'
+            'image' => 'nullable|mimes:jpg,png',
+            'status' => 'required|in:0,1,2'
         ];
     }
 }

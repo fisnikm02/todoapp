@@ -26,7 +26,8 @@ class UpdateRequest extends ApiRequest
         return [
             'id' => 'required|exists:tasks,id',
             'name' => 'required|max:100',
-            'image' => 'nullable|mimes:jpg,png'
+            'image' => 'nullable|mimes:jpg,png',
+            'status' => 'required|in:0,1,2'
         ];
     }
 }

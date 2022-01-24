@@ -1,5 +1,6 @@
 import addModal from './Modals/add'
 import editModal from './Modals/edit'
+import draggable from "vuedraggable";
 export default {
   name: "Dashboard-Module",
   metaInfo: function () {
@@ -10,10 +11,13 @@ export default {
   data() {
     return {
       searchInput: "",
-      tasks: [],
       row: [],
+      status: 0,
       showAddModal: false,
-      showEditModal: false
+      showEditModal: false,
+      todo: [],
+      doing: [],
+      done: []
     };
   },
   mounted() {
@@ -26,16 +30,36 @@ export default {
     toggleModalEdit: function () {
       this.showEditModal = !this.showEditModal;
     },
-    get: function (search = '', page = 1) {
+    get: function (search = '') {
       let self = this;
 
       self.users = [];
-      
-      let url = this.$backendUrl + '/tasks?page=' + page + ((search != '') ? '&search=' + search : '')
+
+      let url = this.$backendUrl + '/tasks' + ((search != '') ? '?search=' + search : '')
       self.$http
         .get(url)
         .then((res) => {
-          self.tasks = res.data.data;
+          let tasks = res.data;
+
+          for (let i = 0; i < tasks.length; i++) {
+            let task = tasks[i];
+
+            if (task.status == 0)
+              self.todo.push({
+                name: task.name,
+                id: task.id
+              });
+            else if (task.status == 1)
+              self.doing.push({
+                name: task.name,
+                id: task.id
+              })
+            else
+              self.done.push({
+                name: task.name,
+                id: task.id
+              })
+          }
         })
         .catch((error) => {
           try {
@@ -51,9 +75,36 @@ export default {
           }
         });
     },
-    search: function() {
+    search: function () {
       this.get(this.searchInput);
+    },
+    add: function () {
+      this.list.push({ name: "Juan" });
+    },
+    replace: function () {
+      this.list = [{ name: "Edgard" }];
+    },
+    clone: function (el) {
+      return {
+        name: el.name + " cloned"
+      };
+    },
+    log: function (evt, type) {
+      let status = 0;
+
+      if(type == 'doing') status = 1; else if(type == 'done') status = 2
+      if(evt.added) {
+        let data = {
+          id: evt.added.element.id,
+          name: evt.added.element.name,
+          status: status
+        }
+        this.$http.put(this.$backendUrl + '/tasks', data).then(() => {
+        })
+      } else {
+        // remove item
+      }
     }
   },
-  components: { addModal, editModal }
+  components: { addModal, editModal, draggable }
 };

@@ -52,11 +52,12 @@
 
 <script>
 export default {
+  props: ['status'],
   data() {
     return {
       basicInfo: {
         name: "",
-        image: ""
+        image: "",
       },
     };
   },
@@ -64,6 +65,8 @@ export default {
   methods: {
     add: function () {
       let self = this;
+
+      self.basicInfo['status'] = this.status
 
       self.$http
         .post(this.$backendUrl + "/tasks", self.basicInfo)

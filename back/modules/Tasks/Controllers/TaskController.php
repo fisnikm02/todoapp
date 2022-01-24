@@ -12,11 +12,10 @@ use Modules\Tasks\Requests\UpdateRequest;
 class TaskController extends Controller
 {
     public function getAll(Request $req) {
-        $nr = $req->input('nr', 50);
         $search = $req->input('search', null);
         $tasks = Task::when($search, function ($q) use ($search) {
             $q->where('name', 'like', '%'. $search .'%');
-        })->orderBy('id', 'desc')->paginate($nr);
+        })->orderBy('id', 'desc')->get();
 
         return $this->response($tasks);
     }

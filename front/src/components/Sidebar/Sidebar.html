@@ -1,7 +1,12 @@
 <div>
-    <nav>
+    <nav v-if="authUser.role == 'admin'">
         <li><router-link :to="{ name: 'admin.dashboard' }">Home</router-link></li>
         <li><router-link :to="{ name: 'admin.tasks' }">Tasks</router-link></li>
         <li><router-link :to="{ name: 'admin.users' }">Users</router-link></li>
+    </nav>
+    <nav v-else>
+        <li><router-link :to="{ name: 'user.dashboard' }">Home</router-link></li>
+        <li><router-link :to="{ name: 'user.tasks' }">Tasks</router-link></li>
+        <li><router-link :to="{ name: 'user.profile' }">Profile</router-link></li>
     </nav>
 </div>
