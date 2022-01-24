@@ -3,11 +3,12 @@
 namespace Modules\Tasks\Models;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Lumen\Auth\Authorizable;
+use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class Task extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
@@ -32,4 +33,21 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return [];
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->created_by = Auth::user()->id;
+        });
+
+        static::updating(function ($model) {
+            $model->updated_by = Auth::user()->id;
+        });
+
+        static::deleting(function ($model) {
+        });
+    }
+
 }
