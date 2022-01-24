@@ -1,41 +1,41 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
-    <div>
-        <div class="row d-flex justify-content-between align-items-center">
-            <h3 class="col-3">Users</h3>
-             
-            <div class="col-5 p-2 m-2 d-flex align-items-center justify-content-end">
-                <div class="d-flex mr-2">
-                    <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
-                    <button class="btn btn-primary" @click="search">Search</button>
-                </div>
-                <button class="btn btn-warning" @click="toggleModalNew">Add User</button>
-            </div>
-        </div>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Role</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="user in users">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.fullname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.gender }}</td>
-                    <td>{{ user.role }}</td>
-                    <td><button type="button" class="btn btn-primary" @click="row = user; toggleModalEdit()">Edit</button></td>
-                </tr>
-            </tbody>
-        </table>
+  <div>
+    <div class="row d-flex justify-content-between align-items-center">
+      <h3 class="col-3 mb-5">My Profile - {{authUser.fullname}}</h3>
     </div>
 
-    <add-modal v-if="showAddModal" @toggleModal="toggleModalNew"/>
-    <edit-modal v-if="showEditModal" :row="row" @toggleModal="toggleModalEdit"/>
+    <div class="row">
+        <div class="row col-md-6">
+            <h5 class="col-12 mt-2 mb-3">My Data</h5>
+            <div class="form-group col-6">
+                <label for="">{{ $t('auth.first_name')}}</label>
+                <input type="text" class="form-control" v-model="authUser.first_name">
+            </div>
+            <div class="form-group col-6">
+                <label for="">{{ $t('auth.last_name')}}</label>
+                <input type="text" class="form-control" v-model="authUser.last_name">
+            </div>
+            <div class="form-group col-6">
+                <label for="">{{ $t('auth.email')}}</label>
+                <input type="text" class="form-control" v-model="authUser.email">
+            </div>
+            <div class="form-group col-6">
+                <label for="">{{ $t('auth.gender')}}</label>
+                <select class="form-control" v-model="authUser.gender">
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
+                </select>
+            </div>
+
+            <button class="m-2 btn btn-primary">Update</button>
+        </div>
+        <div class="row col-md-6">
+            <h5 class="col-12 mt-2 mb-2">My Tasks</h5>
+            
+            <div class="col-4"><p>Todo: {{ count.todo }}</p></div>
+            <div class="col-4"><p>Doing: {{ count.doing }}</p></div>
+            <div class="col-4"><p>Done: {{ count.done }}</p></div>
+        </div>
+    </div>
+  </div>
 </adminLayout>

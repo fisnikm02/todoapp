@@ -1,7 +1,5 @@
-import addModal from './Modals/add'
-import editModal from './Modals/edit'
 export default {
-  name: "Dashboard-Module",
+  name: "Profile-Module",
   metaInfo: function () {
     return {
       title: this.$t("navbar.dashboard"),
@@ -9,33 +7,32 @@ export default {
   },
   data() {
     return {
-      searchInput: "",
-      users: [],
-      row: [],
-      showAddModal: false,
-      showEditModal: false
+      authUser: this.$store.getters.getLoggedUser,
+      count: {
+        todo: 0,
+        doing: 0,
+        done: 0
+      }
     };
   },
   mounted() {
     this.get();
   },
   methods: {
-    toggleModalNew: function () {
-      this.showAddModal = !this.showAddModal;
-    },
-    toggleModalEdit: function () {
-      this.showEditModal = !this.showEditModal;
-    },
-    get: function (search = '', page = 1) {
+    get: function () {
       let self = this;
-
-      self.users = [];
       
-      let url = this.$backendUrl + '/users?page=' + page + ((search != '') ? '&search=' + search : '')
       self.$http
-        .get(url)
+        .get(this.$backendUrl + '/tasks/user/' + self.authUser.id)
         .then((res) => {
-          self.users = res.data.data;
+          
+          for(let i = 0; i < res.data.length; i++) {
+            let row = res.data[i];
+
+            if(row.status == 0) self.count.todo += 1
+            else if(row.status == 1) self.count.doing += 1
+            else self.count.done += 1
+          }
         })
         .catch((error) => {
           try {
@@ -50,10 +47,6 @@ export default {
             console.log(e);
           }
         });
-    },
-    search: function() {
-      this.get(this.searchInput);
     }
   },
-  components: { addModal, editModal }
 };

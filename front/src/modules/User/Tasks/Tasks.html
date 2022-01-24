@@ -21,6 +21,7 @@
                     <div class="list-group-item" v-for="(element, index) in todo" :key="element.name">
                         {{ index }}. {{ element.name }}
                     </div>
+                    <div v-if="todo.length == 0">No tasks in todo!</div>
                 </draggable>
             </div>
 

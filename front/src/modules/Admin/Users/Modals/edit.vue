@@ -109,7 +109,7 @@ export default {
       self.$http
         .put(this.$backendUrl + "/users", self.row)
         .then(() => {
-          this.$router.push({ name: "admin.users" });
+          this.$router.go();
         })
         .catch((error) => {
           try {

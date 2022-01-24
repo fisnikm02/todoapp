@@ -1,7 +1,11 @@
 // Import Modules
-import users from '@/modules/Admin/Users'
+import userDashboard from '@/modules/User/Dashboard'
+import userTasks from '@/modules/User/Tasks'
+import userProfile from '@/modules/User/Profile'
 
 export default [
-    // Users
-    { path: '/admin/users', name: 'admin.users', component: users, meta: { auth: true } },
+    // User
+    { path: '/user/dashboard', name: 'user.dashboard', component: userDashboard, meta: { auth_user: true } },
+    { path: '/user/tasks', name: 'user.tasks', component: userTasks, meta: { auth_user: true } },
+    { path: '/user/profile', name: 'user.profile', component: userProfile, meta: { auth_user: true } },
 ]

@@ -3,7 +3,7 @@ export default {
     props: ['activeMenu'],
     data() {
         return {
-            authUser: this.$store.getters.getLoggedUser.token
+            authUser: this.$store.getters.getLoggedUser
         }
     }
 }

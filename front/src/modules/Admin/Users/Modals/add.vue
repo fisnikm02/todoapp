@@ -114,7 +114,7 @@ export default {
       self.$http
         .post(this.$backendUrl + "/users", self.basicInfo)
         .then(() => {
-          this.$router.push({ name: "admin.users" });
+          this.$router.go();
         })
         .catch((error) => {
           try {

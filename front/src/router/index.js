@@ -4,11 +4,12 @@ import store from '@/store'
 import VueRouter from 'vue-router'
 import general from './general'
 import users from './users'
+import admin from './admin'
 
 Vue.use(VueRouter)
 
 var allRoutes = []
-allRoutes = allRoutes.concat(general, users)
+allRoutes = allRoutes.concat(general, users, admin)
 const routes = allRoutes
 const router = new VueRouter({
     mode: 'history',
