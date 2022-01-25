@@ -17,7 +17,7 @@
         <div class="modal-body">
           <form>
             <div class="row d-flex">
-              <div class="form-group col">
+              <div class="form-group col-12">
                 <label for="">{{ $t("auth.name") }}</label>
                 <input
                   type="text"
@@ -25,14 +25,14 @@
                   class="form-control"
                 />
               </div>
-              <!-- <div class="form-group col">
-                <label for="">{{ $t("auth.last_name") }}</label>
+              <div class="form-group col-12">
+                <label for="">{{ $t("app.image") }}</label>
                 <input
-                  type="text"
-                  v-model="basicInfo.last_name"
+                  type="file"
+                  ref="image"
                   class="form-control"
                 />
-              </div> -->
+              </div>
             </div>
            
           </form>
@@ -66,12 +66,19 @@ export default {
     add: function () {
       let self = this;
 
-      self.basicInfo['status'] = this.status
+      // self.basicInfo['status'] = this.status
+
+      let form = new FormData;
+
+      form.append('name', self.basicInfo.name);
+      if(this.$refs.image.files[0]) form.append('image', this.$refs.image.files[0])
+      form.append('status', this.status)
 
       self.$http
-        .post(this.$backendUrl + "/tasks", self.basicInfo)
-        .then(() => {
-          this.$router.go();
+        .post(this.$backendUrl + "/tasks", form)
+        .then((res) => {
+          console.log(res)
+          // this.$router.go();
         })
         .catch((error) => {
           try {

@@ -34,7 +34,14 @@ class TaskController extends Controller
 
     public function create(AddRequest $req) {
         $task = new Task;
-        $task->create($req->only(['name', 'image', 'status']));
+
+        $task->fill($req->only(['name','status']));
+        if($req->hasFile('image') && $req->file('image')) {
+            $name = uniqid() . '-' . $req->image->getClientOriginalName();
+            $path = $req->image->move(storage_path('app/tasks'), $name);
+            $task->image = $name;
+        }
+        $task->save();
 
         return $this->response($task);
     }

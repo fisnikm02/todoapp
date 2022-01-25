@@ -19,7 +19,9 @@
                 </div>
                 <draggable class="mt-3 list-group" :list="todo" group="people" @change="log($event,'todo')">
                     <div class="list-group-item" v-for="(element, index) in todo" :key="element.name">
-                        {{ index }}. {{ element.name }}
+                        
+                        <p>{{ index }}. {{ element.name }}</p>
+                        <img :src="element.image" width="100%" alt="">
                     </div>
                     <div v-if="todo.length == 0">No tasks in todo!</div>
                 </draggable>

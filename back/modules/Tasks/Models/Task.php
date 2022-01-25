@@ -18,6 +18,7 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'tasks';
     protected $fillable = ['name', 'image', 'status', 'created_by'];
     protected $hidden = [];
+    protected $appends = ['image_url'];
     
     public function getJWTIdentifier()
     {
@@ -48,6 +49,11 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
 
         static::deleting(function ($model) {
         });
+    }
+
+    public function getImageUrlAttribute() {
+        if($this->image)
+            return storage_path('app/tasks').'/'.$this->image;
     }
 
     public function user() {

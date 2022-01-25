@@ -43,22 +43,18 @@ export default {
 
           for (let i = 0; i < tasks.length; i++) {
             let task = tasks[i];
-
+            
+            let row = {
+              id: task.id,
+              name: task.name,
+              image: task.image_url
+            }
             if (task.status == 0)
-              self.todo.push({
-                name: task.name,
-                id: task.id
-              });
+              self.todo.push(row);
             else if (task.status == 1)
-              self.doing.push({
-                name: task.name,
-                id: task.id
-              })
+              self.doing.push(row)
             else
-              self.done.push({
-                name: task.name,
-                id: task.id
-              })
+              self.done.push(row)
           }
         })
         .catch((error) => {
