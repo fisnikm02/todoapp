@@ -4,7 +4,7 @@ namespace Modules\Users\Requests\User;
 
 use App\Http\ApiRequest;
 
-class OneRowRequest extends ApiRequest
+class ProfileRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,11 @@ class OneRowRequest extends ApiRequest
     {
         return [
             'id' => 'required|exists:users,id',
+            'first_name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'email' => 'required|unique:users,email,'. $this->input('id') . ',id',
+            'password' => 'nullable|confirmed|min:6|max:100',
+            'gender' => 'required|in:m,f'
         ];
     }
 }

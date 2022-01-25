@@ -2,12 +2,13 @@
 
 namespace Modules\Users\Models;
 
+use Modules\Tasks\Models\Task;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
+use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
@@ -17,6 +18,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $fillable = ['first_name', 'last_name', 'email', 'password', 'gender', 'role'];
     protected $hidden = ['password'];
     protected $appends = ['fullname'];
+    protected $with = ['tasks'];
 
 
     public function getFullnameAttribute() {
@@ -54,5 +56,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = app('hash')->make($value);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'created_by', 'id');
     }
 }

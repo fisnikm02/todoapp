@@ -58,8 +58,10 @@ router.beforeEach((to, from, next) => {
 
     // Guest
     if (to.meta.guest) {
-        if (loggedUser)
+        if (loggedUser && loggedUser.role == 'admin')
             return redirectToRoute('admin.dashboard')
+        else if(loggedUser && loggedUser.role == 'user')
+            return redirectToRoute('user.dashboard')
         else
             return next()
     }

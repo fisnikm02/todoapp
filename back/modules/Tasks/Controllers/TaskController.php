@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use Modules\Tasks\Models\Task;
 use Modules\Tasks\Requests\AddRequest;
 use Modules\Tasks\Requests\DeleteRequest;
-use Modules\Tasks\Requests\OneRowRequest;
 use Modules\Tasks\Requests\UpdateRequest;
-use Modules\Tasks\Requests\OneRowUserRequest;
 
 class TaskController extends Controller
 {
@@ -22,8 +20,10 @@ class TaskController extends Controller
         return $this->response($tasks);
     }
 
-    public function get(OneRowRequest $req) {
-
+    public function get($id) {
+        $task = Task::find($id);
+        
+        return $this->response($task);
     }
 
     public function getByUserId($user_id) {
@@ -34,14 +34,14 @@ class TaskController extends Controller
 
     public function create(AddRequest $req) {
         $task = new Task;
-        $task->create($req->all());
+        $task->create($req->only(['name', 'image', 'status']));
 
         return $this->response($task);
     }
 
     public function update(UpdateRequest $req) {
         $task = Task::find($req->id);
-        $task->update($req->all());
+        $task->update($req->only(['name', 'image', 'status']));
 
         return $this->response($task);
     }

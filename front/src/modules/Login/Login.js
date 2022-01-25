@@ -29,9 +29,9 @@ export default {
       // Ajax Request
       self.$http
         .post(this.$backendUrl + "/login", self.loginData)
-        .then((response) => {
-          self.$store.commit("LOGGED_USER", response.data);
-          if(response.data.role == 'admin')
+        .then((res) => {
+          self.$store.commit("LOGGED_USER", res.data);
+          if(res.data.role == 'admin')
             self.$router.push({ name: "admin.dashboard" });
           else 
             self.$router.push({ name: "user.dashboard" });

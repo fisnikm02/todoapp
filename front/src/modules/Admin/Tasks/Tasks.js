@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       searchInput: "",
-      users: [],
+      tasks: [],
       row: [],
       showAddModal: false,
       showEditModal: false
@@ -26,16 +26,16 @@ export default {
     toggleModalEdit: function () {
       this.showEditModal = !this.showEditModal;
     },
-    get: function (search = '', page = 1) {
+    get: function (search = '') {
       let self = this;
 
       self.users = [];
       
-      let url = this.$backendUrl + '/users?page=' + page + ((search != '') ? '&search=' + search : '')
+      let url = this.$backendUrl + '/tasks' + ((search != '') ? '?search=' + search : '')
       self.$http
         .get(url)
         .then((res) => {
-          self.users = res.data.data;
+          self.tasks = res.data;
         })
         .catch((error) => {
           try {

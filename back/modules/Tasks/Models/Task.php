@@ -2,6 +2,7 @@
 
 namespace Modules\Tasks\Models;
 
+use Modules\Users\Models\User;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Lumen\Auth\Authorizable;
@@ -15,9 +16,8 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable;
 
     protected $table = 'tasks';
-    protected $fillable = ['name', 'image', 'status'];
+    protected $fillable = ['name', 'image', 'status', 'created_by'];
     protected $hidden = [];
-
     
     public function getJWTIdentifier()
     {
@@ -50,4 +50,7 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
         });
     }
 
+    public function user() {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

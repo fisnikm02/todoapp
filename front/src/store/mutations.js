@@ -14,6 +14,16 @@ const LOGGED_USER = (state, user) => {
     state.loggedUser = JSON.stringify(user)
 }
 
+const UPDATE_LOGGED_USER = (state, user) => {
+    let userLogged = JSON.parse(state.loggedUser)
+    Object.keys(userLogged).forEach((el) => {
+        console.log(el, user[el]);
+        if (user[el]) userLogged[el] = user[el];
+      });
+    localStorage.setItem('loggedUser', JSON.stringify(userLogged))
+    state.loggedUser = JSON.stringify(userLogged)
+}
+
 const REMOVE_LOGGED_USER = (state) => {
     state.loggedUser = null
     localStorage.removeItem('loggedUser')
@@ -22,5 +32,6 @@ const REMOVE_LOGGED_USER = (state) => {
 export default {
     DISPLAY_LOADER,
     LOGGED_USER,
-    REMOVE_LOGGED_USER
+    REMOVE_LOGGED_USER,
+    UPDATE_LOGGED_USER
 }

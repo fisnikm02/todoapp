@@ -1,14 +1,14 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
     <div>
         <div class="row d-flex justify-content-between align-items-center">
-            <h3 class="col-3">Users</h3>
+            <h3 class="col-3">Tasks</h3>
              
             <div class="col-5 p-2 m-2 d-flex align-items-center justify-content-end">
                 <div class="d-flex mr-2">
                     <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
                     <button class="btn btn-primary" @click="search">Search</button>
                 </div>
-                <button class="btn btn-warning" @click="toggleModalNew">Add User</button>
+                <button class="btn btn-warning" @click="toggleModalNew">Add Task</button>
             </div>
         </div>
 
@@ -17,20 +17,20 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Role</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Created By</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.fullname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.gender }}</td>
-                    <td>{{ user.role }}</td>
-                    <td><button type="button" class="btn btn-primary" @click="row = user; toggleModalEdit()">Edit</button></td>
+                <tr v-for="task in tasks">
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.image_url }}</td>
+                    <td>{{ (task.status == 0) ? 'todo' : ((task.status == 1) ? 'doing' : 'done') }}</td>
+                    <td>{{ task.created_by }}</td>
+                    <td><button type="button" class="btn btn-primary" @click="row = task; toggleModalEdit()">Edit</button></td>
                 </tr>
             </tbody>
         </table>

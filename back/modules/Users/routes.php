@@ -1,6 +1,5 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
 $router = $this->app['router'];
 
 // Auth
@@ -8,10 +7,11 @@ $router->post('/login', 'LoginController@login');
 $router->post('/register', 'LoginController@register');
 
 // Users
-$router->group(['middleware' => 'auth'], function () use ($router) {
-    $router->get('/users', 'UserController@getAll');
-    $router->get('/users/{id:[0-9]+}', 'UserController@get');
-    $router->post('/users', 'UserController@create');
-    $router->put('/users', 'UserController@update');
-    $router->delete('/users', 'UserController@delete');
+$router->group(['prefix' => 'users', 'middleware' => ['auth'] ], function () use ($router) {
+    $router->get('/', 'UserController@getAll');
+    $router->get('/{id:[0-9]+}', 'UserController@get');
+    $router->post('/', 'UserController@create');
+    $router->put('/', 'UserController@update');
+    $router->put('/profile', 'UserController@updateProfile');
+    $router->delete('/', 'UserController@delete');
 });

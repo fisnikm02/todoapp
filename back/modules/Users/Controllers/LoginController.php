@@ -40,7 +40,7 @@ class LoginController extends Controller
     public function register(RegisterRequest $request)
     {
         $register = new User;
-        $register->fill($request->all());
+        $register->fill($request->only(['first_name', 'last_name', 'email', 'password', 'gender']));
         $register->role = 'user';
         $register->save();
 
