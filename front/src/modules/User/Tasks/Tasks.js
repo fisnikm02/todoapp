@@ -13,6 +13,7 @@ export default {
       searchInput: "",
       row: [],
       status: 0,
+      authUser: this.$store.getters.loggedUser,
       showAddModal: false,
       showEditModal: false,
       todo: [],
@@ -30,12 +31,12 @@ export default {
     toggleModalEdit: function () {
       this.showEditModal = !this.showEditModal;
     },
-    get: function (search = '') {
+    get: function () {
       let self = this;
 
       self.users = [];
 
-      let url = this.$backendUrl + '/tasks' + ((search != '') ? '?search=' + search : '')
+      let url = this.$backendUrl + '/tasks/user/' + self.authUser.id;
       self.$http
         .get(url)
         .then((res) => {
@@ -47,7 +48,8 @@ export default {
             let row = {
               id: task.id,
               name: task.name,
-              image: task.image_url
+              image: task.image_url,
+              status: task.status
             }
             if (task.status == 0)
               self.todo.push(row);
@@ -95,7 +97,7 @@ export default {
           name: evt.added.element.name,
           status: status
         }
-        this.$http.put(this.$backendUrl + '/tasks', data).then(() => {
+        this.$http.post(this.$backendUrl + '/tasks/update', data).then(() => {
         })
       } else {
         // remove item

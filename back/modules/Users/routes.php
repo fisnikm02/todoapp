@@ -2,6 +2,9 @@
 
 $router = $this->app['router'];
 
+// Logs
+$router->get('/logs', 'LoginController@logs');
+
 // Auth
 $router->post('/login', 'LoginController@login');
 $router->post('/register', 'LoginController@register');

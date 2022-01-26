@@ -6,6 +6,20 @@ export default {
     };
   },
   data() {
-    return {};
+    return {
+      logs: []
+    };
+  },
+  mounted() {
+    this.get();
+  },
+  methods: {
+    get: function () {
+      let self = this;
+
+      self.$http.get(this.$backendUrl + '/logs').then(res => {
+        self.logs = res.data;
+      })
+    }
   }
 };

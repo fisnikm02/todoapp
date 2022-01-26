@@ -1,4 +1,44 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
-    <div style="background: rgb(233, 230, 230);">
+    <div>
+        <div class="row">
+            <div class="col-sm-12 mt-2 col-lg-4">
+                <!-- small box -->
+                <div class="small-box text-white bg-danger">
+                    <div class="inner">
+                        <h3>{{ logs.users }}</h3>
+                        <p>Users </p>
+                    </div>
+                    <router-link :to="{ name: 'admin.users' }" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-12 mt-2 col-lg-4">
+                <!-- small box -->
+                <div class="small-box text-white bg-success">
+                    <div class="inner">
+                        <h3>{{ logs.admins }}</h3>
+
+                        <p>Admins</p>
+                    </div>
+                    <router-link :to="{ name: 'admin.users' }" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-12 mt-2 col-lg-4">
+                <!-- small box -->
+                <div class="small-box text-white bg-info">
+                    <div class="inner">
+                        <h3>{{ logs.tasks }}</h3>
+
+                        <p>Tasks</p>
+
+                        <p>Todo: {{ logs.tasks_todo }}, Doing: {{ logs.tasks_doing }}, Done: {{ logs.tasks_done }}</p>
+                    </div>
+                    <router-link :to="{ name: 'admin.tasks' }" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+        </div>
     </div>
 </adminLayout>

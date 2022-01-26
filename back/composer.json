@@ -24,7 +24,10 @@
         "psr-4": {
             "Modules\\": "modules/",
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Functions/general.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

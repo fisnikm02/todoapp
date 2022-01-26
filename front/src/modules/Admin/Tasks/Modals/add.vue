@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Users - New</h5>
+          <h5 class="modal-title">Task - New</h5>
           <button
             type="button"
             class="close"
@@ -18,63 +18,44 @@
           <form>
             <div class="row d-flex">
               <div class="form-group col">
-                <label for="">{{ $t("auth.first_name") }}</label>
+                <label for="">{{ $t("auth.name") }}</label>
                 <input
                   type="text"
-                  v-model="basicInfo.first_name"
+                  v-model="basicInfo.name"
                   class="form-control"
                 />
               </div>
               <div class="form-group col">
-                <label for="">{{ $t("auth.last_name") }}</label>
-                <input
-                  type="text"
-                  v-model="basicInfo.last_name"
-                  class="form-control"
-                />
-              </div>
-            </div>
-            <div class="row d-flex">
-              <div class="form-group col">
-                <label for="">{{ $t("auth.email") }}</label>
-                <input
-                  type="text"
-                  v-model="basicInfo.email"
-                  class="form-control"
-                />
-              </div>
-              <div class="form-group col">
-                <label for="">{{ $t("auth.gender") }}</label>
-                <select v-model="basicInfo.gender" class="form-control">
-                  <option value="m">Male</option>
-                  <option value="f">Female</option>
+                <label for="">{{ $t("app.status") }}</label>
+                <select v-model="basicInfo.status" class="form-control">
+                  <option value="0">Todo</option>
+                  <option value="1">Doing</option>
+                  <option value="2">Done</option>
                 </select>
               </div>
             </div>
             <div class="row d-flex">
-              <div class="form-group col">
-                <label for="">{{ $t("auth.password") }}</label>
+              <div class="form-group col-6">
+                <label for="">{{ $t("auth.user") }}</label>
                 <input
-                  type="password"
-                  v-model="basicInfo.password"
+                  type="text"
+                  v-model="basicInfo.user_id"
                   class="form-control"
                 />
               </div>
-              <div class="form-group col">
-                <label for="">{{ $t("auth.confirmation_password") }}</label>
+              <div class="form-group col-6">
+                <label for="">{{ $t("app.image") }}</label>
                 <input
-                  type="password"
-                  v-model="basicInfo.password_confirmation"
-                  class="form-control"
+                  type="file"
+                  ref="image"
+                  @change="createImage($refs.image.files[0])"
+                />
+                <img
+                  v-if="basicInfo.image"
+                  :src="basicInfo.image"
+                  id="img-task"
                 />
               </div>
-            </div>
-            <div class="form-group">
-                <label for="">Role</label>
-                <select v-model="basicInfo.role" class="form-control">
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
-                </select>
             </div>
           </form>
         </div>
@@ -96,13 +77,10 @@ export default {
   data() {
     return {
       basicInfo: {
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
-        gender: "m",
-        role: "user",
+        name: "",
+        image: null,
+        status: 0,
+        user_id: "",
       },
     };
   },
@@ -129,6 +107,13 @@ export default {
             console.log(e);
           }
         });
+    },
+    createImage: function (file) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.basicInfo.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
   },
 };

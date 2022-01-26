@@ -16,7 +16,7 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable;
 
     protected $table = 'tasks';
-    protected $fillable = ['name', 'image', 'status', 'created_by'];
+    protected $fillable = ['name', 'image', 'status'];
     protected $hidden = [];
     protected $appends = ['image_url'];
     
@@ -35,28 +35,12 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
         return [];
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->created_by = Auth::user()->id;
-        });
-
-        static::updating(function ($model) {
-            $model->updated_by = Auth::user()->id;
-        });
-
-        static::deleting(function ($model) {
-        });
-    }
-
     public function getImageUrlAttribute() {
         if($this->image)
-            return storage_path('app/tasks').'/'.$this->image;
+            return asset('storage/tasks/' . $this->image);
     }
 
     public function user() {
-        return $this->belongsTo(User::class, 'created_by', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

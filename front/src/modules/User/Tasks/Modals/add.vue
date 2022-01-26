@@ -31,7 +31,10 @@
                   type="file"
                   ref="image"
                   class="form-control"
+                  @change="createImage($refs.image.files[0])"
                 />
+
+                <img v-if="basicInfo.image" id="img-task" class="mt-2" :src="basicInfo.image">
               </div>
             </div>
            
@@ -57,7 +60,7 @@ export default {
     return {
       basicInfo: {
         name: "",
-        image: "",
+        image: null,
       },
     };
   },
@@ -65,8 +68,6 @@ export default {
   methods: {
     add: function () {
       let self = this;
-
-      // self.basicInfo['status'] = this.status
 
       let form = new FormData;
 
@@ -76,9 +77,9 @@ export default {
 
       self.$http
         .post(this.$backendUrl + "/tasks", form)
-        .then((res) => {
-          console.log(res)
-          // this.$router.go();
+        .then(() => {
+          // console.log(res)
+          this.$router.go();
         })
         .catch((error) => {
           try {
@@ -94,6 +95,13 @@ export default {
           }
         });
     },
+    createImage: function(file){
+        let reader = new FileReader();
+        reader.onload = (e) =>{
+            this.basicInfo.image = e.target.result;
+        }
+        reader.readAsDataURL(file)
+    }
   },
 };
 </script>

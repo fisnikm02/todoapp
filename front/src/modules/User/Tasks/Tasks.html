@@ -1,12 +1,12 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
     <div>
         <div class="row d-flex justify-content-between align-items-center">
-            <h3 class="col-3">My tasks</h3>
+            <h3 class="col-3"><i class="fas fa-tasks"></i> My tasks</h3>
 
             <div class="col-5 p-2 m-2 d-flex align-items-center justify-content-end">
                 <div class="d-flex mr-2">
                     <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
-                    <button class="ml-2 btn btn-primary" @click="search">Search</button>
+                    <button class="ml-2 btn btn-primary" @click="search"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
         </div>
@@ -15,13 +15,15 @@
             <div class="col-md-4">
                 <div class="d-flex align-items-center">
                     <h4>Todo</h4>
-                    <button class="ml-1 btn btn-warning" @click="status = 0; toggleModalNew()">Add</button>
+                    <button class="ml-1 btn btn-warning" @click="status = 0; toggleModalNew()"><i class="fas fa-plus"></i> Add</button>
                 </div>
                 <draggable class="mt-3 list-group" :list="todo" group="people" @change="log($event,'todo')">
-                    <div class="list-group-item" v-for="(element, index) in todo" :key="element.name">
-                        
-                        <p>{{ index }}. {{ element.name }}</p>
-                        <img :src="element.image" width="100%" alt="">
+                    <div class="list-group-item" v-for="(element, index) in todo" :key="'todo' + index">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>{{ index }}. {{ element.name }}</p>
+                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
+                        </div>
+                        <img id="img-task" :src="element.image" width="100%" alt="">
                     </div>
                     <div v-if="todo.length == 0">No tasks in todo!</div>
                 </draggable>
@@ -30,11 +32,15 @@
             <div class="col-md-4">
                 <div class="d-flex align-items-center">
                     <h4>Doing</h4>
-                    <button class="ml-1 btn btn-warning" @click="status = 1; toggleModalNew()">Add</button>
+                    <button class="ml-1 btn btn-warning" @click="status = 1; toggleModalNew()"><i class="fas fa-plus"></i> Add</button>
                 </div>
                 <draggable class="mt-3 list-group" :list="doing" group="people" @change="log($event,'doing')">
-                    <div class="list-group-item" v-for="(element, index) in doing" :key="element.name">
-                        {{ index }}. {{ element.name }}
+                    <div class="list-group-item" v-for="(element, index) in doing" :key="'doing' + index">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>{{ index }}. {{ element.name }}</p>
+                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
+                        </div>
+                        <img id="img-task" :src="element.image" width="100%" alt="">
                     </div>
                 </draggable>
             </div>
@@ -44,8 +50,12 @@
                     <h4>Done</h4>
                 </div>
                 <draggable class="mt-3 list-group" :list="done" group="people" @change="log($event,'done')">
-                    <div class="list-group-item" v-for="(element, index) in done" :key="element.name">
-                        {{ index }}. {{ element.name }}
+                    <div class="list-group-item" v-for="(element, index) in done" :key="'done' + index">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>{{ index }}. {{ element.name }}</p>
+                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
+                        </div>
+                        <img id="img-task" :src="element.image" width="100%" alt="">
                     </div>
                 </draggable>
             </div>

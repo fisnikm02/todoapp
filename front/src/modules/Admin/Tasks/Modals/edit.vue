@@ -86,7 +86,7 @@ export default {
       let self = this;
 
       self.$http
-        .delete(this.$backendUrl + "/tasks", self.row)
+        .delete(this.$backendUrl + "/tasks", {data: { id: this.row.id } })
         .then(() => {
           this.$router.go();
         })

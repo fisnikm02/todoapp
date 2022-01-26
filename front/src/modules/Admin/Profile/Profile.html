@@ -1,7 +1,7 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
   <div>
     <div class="row d-flex justify-content-between align-items-center">
-      <h3 class="col-3 mb-5">My Profile - {{authUser.fullname}}</h3>
+      <h4 class="col-sm-12 col-md-4 mb-5">My Profile - {{authUser.fullname}}</h4>
     </div>
 
     <div class="row">
@@ -27,7 +27,7 @@
                 </select>
             </div>
 
-            <button class="m-2 btn btn-primary" @click="update">Update</button>
+            <button class="m-2 btn btn-primary" @click="update"><i class="far fa-edit"></i> Update</button>
         </div>
     </div>
   </div>

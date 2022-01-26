@@ -5,6 +5,7 @@ namespace Modules\Tasks\Controllers;
 use App\Http\Controller;
 use Illuminate\Http\Request;
 use Modules\Tasks\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use Modules\Tasks\Requests\AddRequest;
 use Modules\Tasks\Requests\DeleteRequest;
 use Modules\Tasks\Requests\UpdateRequest;
@@ -27,7 +28,7 @@ class TaskController extends Controller
     }
 
     public function getByUserId($user_id) {
-        $tasks = Task::where('created_by', $user_id)->orderBy('id', 'desc')->get();
+        $tasks = Task::where('user_id', $user_id)->orderBy('id', 'desc')->get();
 
         return $this->response($tasks);
     }
@@ -35,12 +36,13 @@ class TaskController extends Controller
     public function create(AddRequest $req) {
         $task = new Task;
 
-        $task->fill($req->only(['name','status']));
+        $task->fill($req->only(['name', 'status']));
         if($req->hasFile('image') && $req->file('image')) {
             $name = uniqid() . '-' . $req->image->getClientOriginalName();
             $path = $req->image->move(storage_path('app/tasks'), $name);
             $task->image = $name;
         }
+        $task->user_id = Auth::user()->id;
         $task->save();
 
         return $this->response($task);
@@ -48,7 +50,14 @@ class TaskController extends Controller
 
     public function update(UpdateRequest $req) {
         $task = Task::find($req->id);
-        $task->update($req->only(['name', 'image', 'status']));
+        $task->fill($req->only(['name', 'status']));
+        if($req->hasFile('image') && $req->file('image')) {
+            $name = uniqid() . '-' . $req->image->getClientOriginalName();
+            $path = $req->image->move(storage_path('app/tasks'), $name);
+            $task->image = $name;
+        }
+        $task->user_id = Auth::user()->id;
+        $task->save();
 
         return $this->response($task);
     }

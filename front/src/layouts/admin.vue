@@ -1,8 +1,10 @@
 <template>
-    <div class="row w-100 d-flex">
-        <sidebar-component class="sidebar col-md-2" v-bind:activeMenu="activeMenu"/>
+    <div class="row w-100 m-0">
+        <div class="sidebar col-4 col-md-2 m-0 p-0">
+            <sidebar-component v-bind:activeMenu="activeMenu"/>
+        </div>
 
-        <div class="col-md-10 d-flex flex-column">
+        <div class="col-8 col-md-10 d-flex flex-column">
             <navbar-component/>
             <div class="w-100 h-screen d-flex flex-column">
                 <main class="w-100 p-6">

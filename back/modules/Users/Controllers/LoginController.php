@@ -3,6 +3,7 @@
 namespace Modules\Users\Controllers;
 
 use App\Http\Controller;
+use Modules\Tasks\Models\Task;
 use Modules\Users\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Modules\Users\Requests\LoginRequest;
@@ -46,5 +47,18 @@ class LoginController extends Controller
 
         // Final Response
         return $this->response($register);
+    }
+    
+    public function logs() {
+        $rows = [];
+
+        $rows['users'] = User::where('role', 'user')->count();
+        $rows['admins'] = User::where('role', 'admin')->count();
+        $rows['tasks'] = Task::count();
+        $rows['tasks_todo'] = Task::where('status', 0)->count();
+        $rows['tasks_doing'] = Task::where('status', 1)->count();
+        $rows['tasks_done'] = Task::where('status', 2)->count();
+
+        return $this->response($rows);
     }
 }
