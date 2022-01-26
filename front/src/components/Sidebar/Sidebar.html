@@ -1,4 +1,9 @@
 <div class="w-100">
+    <nav>
+        <li>
+            <span id="logo">TODO APP</span>
+        </li>
+    </nav>
     <nav v-if="authUser.role == 'admin'">
         <li><router-link :to="{ name: 'admin.dashboard' }"><i class="fas fa-home"></i> Home</router-link></li>
         <li><router-link :to="{ name: 'admin.tasks' }"><i class="fas fa-tasks"></i> Tasks</router-link></li>

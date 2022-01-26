@@ -79,11 +79,11 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" @click="add" class="btn btn-primary">
+          <button type="button" @click="update" class="btn btn-primary">
             Save
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
+          <button type="button" @click="dtl" class="btn btn-danger">
+            Delete
           </button>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default {
     console.log(this.row);
   },
   methods: {
-    add: function () {
+    update: function () {
       let self = this;
 
       self.$http
@@ -125,6 +125,28 @@ export default {
           }
         });
     },
+    dtl: function () {
+      let self = this;
+
+      self.$http
+        .delete(this.$backendUrl + "/users", { data: { id: self.row.id } })
+        .then(() => {
+          this.$router.go();
+        })
+        .catch((error) => {
+          try {
+            if (error.response.status == 422) {
+              for (var errorKey in error.response.data.errors) {
+                if (errorKey in self.errors) {
+                  self.errors[errorKey] = true;
+                }
+              }
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        });
+    }
   },
 };
 </script>

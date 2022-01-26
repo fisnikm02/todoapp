@@ -37,11 +37,13 @@
             <div class="row d-flex">
               <div class="form-group col-6">
                 <label for="">{{ $t("auth.user") }}</label>
-                <input
-                  type="text"
-                  v-model="basicInfo.user_id"
-                  class="form-control"
-                />
+                <select class="form-control" v-model="basicInfo.user_id">
+                  <option value="">Choose one!</option>
+                  <option v-for="user in users" :key="user.id" :value="user.id">
+
+                    {{ user.fullname }}
+                  </option>
+                </select>
               </div>
               <div class="form-group col-6">
                 <label for="">{{ $t("app.image") }}</label>
@@ -63,9 +65,6 @@
           <button type="button" @click="add" class="btn btn-primary">
             Save
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
         </div>
       </div>
     </div>
@@ -76,6 +75,7 @@
 export default {
   data() {
     return {
+      users: [],
       basicInfo: {
         name: "",
         image: null,
@@ -84,15 +84,45 @@ export default {
       },
     };
   },
-  mounted() {},
+  mounted() {
+    this.get();
+  },
   methods: {
-    add: function () {
+    get: function () {
       let self = this;
 
       self.$http
-        .post(this.$backendUrl + "/users", self.basicInfo)
+        .get(this.$backendUrl + "/users?page=1")
+        .then((res) => {
+          self.users = res.data.data.filter((x) => x.role == 'user');
+        })
+        .catch((error) => {
+          try {
+            if (error.response.status == 422) {
+              for (var errorKey in error.response.data.errors) {
+                if (errorKey in self.errors) {
+                  self.errors[errorKey] = true;
+                }
+              }
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        });
+    },
+    add: function () {
+      let self = this;
+
+      let form = new FormData;
+
+      form.append('name', self.basicInfo.name);
+      form.append('status', self.basicInfo.status);
+      form.append('user_id', self.basicInfo.user_id);
+      if(this.$refs.image.files[0]) form.append('image', this.$refs.image.files[0]);
+      self.$http
+        .post(this.$backendUrl + "/tasks", form)
         .then(() => {
-          this.$router.push({ name: "admin.users" });
+          this.$router.go();
         })
         .catch((error) => {
           try {

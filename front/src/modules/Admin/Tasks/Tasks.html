@@ -29,7 +29,7 @@
                 <tr v-for="task in tasks">
                     <td>{{ task.id }}</td>
                     <td>{{ task.name }}</td>
-                    <td><img id="img-task-table" :src="task.image_url ? task.image_url : image('no-image.png')"></td>
+                    <td><img id="img-task-table" :src="task.image_url ? task.image_url : image('no-image.jpg')"></td>
                     <td>{{ (task.status == 0) ? 'todo' : ((task.status == 1) ? 'doing' : 'done') }}</td>
                     <td>{{ task.user_id }}</td>
                     <td><button type="button" class="btn btn-primary" @click="row = task; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></td>

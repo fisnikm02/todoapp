@@ -28,7 +28,7 @@ class UpdateRequest extends ApiRequest
             'first_name' => 'required|max:50',
             'last_name' => 'required|max:50',
             'email' => 'required|unique:users,email,'. $this->input('id') . ',id',
-            'password' => 'required|confirmed|min:6|max:100',
+            'password' => 'nullable|confirmed|min:6|max:100',
             'gender' => 'required|in:m,f',
             'role' => 'required|in:admin,user'
         ];

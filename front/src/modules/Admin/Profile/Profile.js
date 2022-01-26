@@ -19,7 +19,7 @@ export default {
         .then((res) => {
           self.$store.commit("UPDATE_LOGGED_USER", res.data);
 
-          // console.log(self.authUser);
+          self.$router.go();
         })
         .catch((error) => {
           try {

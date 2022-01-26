@@ -82,9 +82,6 @@
           <button type="button" @click="add" class="btn btn-primary">
             Save
           </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
         </div>
       </div>
     </div>

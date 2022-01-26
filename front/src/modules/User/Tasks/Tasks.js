@@ -13,7 +13,7 @@ export default {
       searchInput: "",
       row: [],
       status: 0,
-      authUser: this.$store.getters.loggedUser,
+      authUser: this.$store.getters.getLoggedUser,
       showAddModal: false,
       showEditModal: false,
       todo: [],

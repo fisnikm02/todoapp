@@ -23,7 +23,7 @@
                             <p>{{ index }}. {{ element.name }}</p>
                             <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
                         </div>
-                        <img id="img-task" :src="element.image" width="100%" alt="">
+                        <img id="img-task" v-if="element.image" :src="element.image" width="100%">
                     </div>
                     <div v-if="todo.length == 0">No tasks in todo!</div>
                 </draggable>
@@ -40,7 +40,7 @@
                             <p>{{ index }}. {{ element.name }}</p>
                             <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
                         </div>
-                        <img id="img-task" :src="element.image" width="100%" alt="">
+                        <img id="img-task" v-if="element.image" :src="element.image" width="100%">
                     </div>
                 </draggable>
             </div>
@@ -55,7 +55,7 @@
                             <p>{{ index }}. {{ element.name }}</p>
                             <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
                         </div>
-                        <img id="img-task" :src="element.image" width="100%" alt="">
+                        <img id="img-task" v-if="element.image" :src="element.image" width="100%">
                     </div>
                 </draggable>
             </div>

@@ -53,11 +53,9 @@ export default {
       self.$http
         .put(this.$backendUrl + "/users/profile", self.authUser)
         .then((res) => {
-          Object.keys(self.authUser).forEach((el) => {
-            if (res.data[el]) self.authUser[el] = res.data[el];
-          });
+          self.$store.commit("UPDATE_LOGGED_USER", res.data);
 
-          console.log(self.authUser);
+          self.$router.go();
         })
         .catch((error) => {
           try {

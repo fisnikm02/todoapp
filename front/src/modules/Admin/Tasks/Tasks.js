@@ -29,7 +29,7 @@ export default {
     get: function (search = '') {
       let self = this;
 
-      self.users = [];
+      self.tasks = [];
       
       let url = this.$backendUrl + '/tasks' + ((search != '') ? '?search=' + search : '')
       self.$http

@@ -16,7 +16,7 @@ class Task extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable;
 
     protected $table = 'tasks';
-    protected $fillable = ['name', 'image', 'status'];
+    protected $fillable = ['name', 'description', 'image', 'status'];
     protected $hidden = [];
     protected $appends = ['image_url'];
     

@@ -1,12 +1,13 @@
 // Import
 import Vue from "vue";
 import App from "./App.vue";
+import VueMeta from "vue-meta";
+import Notifications from "vue-notification";
 import router from "./router";
 import i18n from "./locales";
-import VueMeta from "vue-meta";
 import store from "./store";
+import functions from "./functions/general";
 import axios from "axios";
-import Notifications from "vue-notification";
 
 // Register layouts
 const authLayout = () => import("./layouts/auth");
@@ -18,6 +19,8 @@ Vue.component("adminLayout", adminLayout);
 Vue.config.productionTip = false;
 Vue.prototype.$backendUrl = process.env.VUE_APP_BACKEND_URL;
 Vue.prototype.$appName = process.env.VUE_APP_NAME;
+
+Vue.mixin(functions);
 Vue.use(Notifications);
 Vue.use(VueMeta);
 

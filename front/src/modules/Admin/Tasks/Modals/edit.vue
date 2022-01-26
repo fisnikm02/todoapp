@@ -18,7 +18,7 @@
           <form>
             <div class="row d-flex">
               <div class="form-group col">
-                <label for="">{{ $t("auth.first_name") }}</label>
+                <label for="">{{ $t("auth.name") }}</label>
                 <input
                   type="text"
                   v-model="row.name"
@@ -33,11 +33,18 @@
                   <option value="2">Done</option>
                 </select>
               </div>
+              <div class="form-group col-12">
+                <label for="">{{ $t("app.image") }}</label>
+                <input type="file" class="form-control" ref="image" @change="createImage($refs.image.files[0])">
+
+                <img v-if="image" id="img-task" :src="image" class="mt-2">
+                <img v-else-if="row.image_url" id="img-task" :src="row.image_url" class="mt-2">
+              </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" @click="save" class="btn btn-primary">
+          <button type="button" @click="update" class="btn btn-primary">
             Save
           </button>
           <button type="button" @click="dtl" class="btn btn-danger">
@@ -54,17 +61,26 @@ export default {
   props: ['row'],
   data() {
     return {
+      image: null,
       basicInfo: {}
     };
   },
   mounted() {
   },
   methods: {
-    save: function () {
+    update: function () {
       let self = this;
 
+      let form = new FormData;
+
+      form.append('id', self.row.id);
+      form.append('name', self.row.name);
+      form.append('status', self.row.status);
+      form.append('user_id', self.row.user_id);
+      if(this.$refs.image.files[0]) form.append('image', this.$refs.image.files[0]);
+
       self.$http
-        .put(this.$backendUrl + "/tasks", self.row)
+        .post(this.$backendUrl + "/tasks/update", form)
         .then(() => {
           this.$router.go();
         })
@@ -86,7 +102,7 @@ export default {
       let self = this;
 
       self.$http
-        .delete(this.$backendUrl + "/tasks", {data: { id: this.row.id } })
+        .delete(this.$backendUrl + "/tasks", {data: { id: self.row.id } })
         .then(() => {
           this.$router.go();
         })
@@ -103,7 +119,14 @@ export default {
             console.log(e);
           }
         });
-    }
+    },
+    createImage: function (file) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
   },
 };
 </script>

@@ -1,4 +1,58 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
-    <div style="background: rgb(233, 230, 230);">
+    <div>
+        <div class="row">
+            <!-- ./col -->
+            <div class="col-sm-12 mt-2 col-lg-3">
+                <!-- small box -->
+                <div class="small-box text-white bg-info">
+                    <div class="inner">
+                        <h3>{{ count.todo + count.doing + count.done }}</h3>
+
+                        <p>All tasks</p>
+                    </div>
+                    <router-link :to="{ name: 'user.tasks' }" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-12 mt-2 col-lg-3">
+                <!-- small box -->
+                <div class="small-box text-white bg-danger">
+                    <div class="inner">
+                        <h3>{{ count.todo }}</h3>
+
+                        <p>Todo</p>
+                    </div>
+                    <router-link :to="{ name: 'user.tasks' }" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-12 mt-2 col-lg-3">
+                <!-- small box -->
+                <div class="small-box text-white bg-warning">
+                    <div class="inner">
+                        <h3>{{ count.doing }}</h3>
+
+                        <p>Doing</p>
+                    </div>
+                    <router-link :to="{ name: 'user.tasks' }" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-12 mt-2 col-lg-3">
+                <!-- small box -->
+                <div class="small-box text-white bg-success">
+                    <div class="inner">
+                        <h3>{{ count.done }}</h3>
+
+                        <p>Done</p>
+                    </div>
+                    <router-link :to="{ name: 'user.tasks' }" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></router-link>
+                </div>
+            </div>
+        </div>
     </div>
 </adminLayout>

@@ -36,13 +36,13 @@ class TaskController extends Controller
     public function create(AddRequest $req) {
         $task = new Task;
 
-        $task->fill($req->only(['name', 'status']));
+        $task->fill($req->only(['name', 'description', 'status']));
         if($req->hasFile('image') && $req->file('image')) {
             $name = uniqid() . '-' . $req->image->getClientOriginalName();
             $path = $req->image->move(storage_path('app/tasks'), $name);
             $task->image = $name;
         }
-        $task->user_id = Auth::user()->id;
+        $task->user_id = (Auth::user()->role == 'admin' && $req->user_id) ? $req->user_id : Auth::user()->id;
         $task->save();
 
         return $this->response($task);
@@ -50,13 +50,13 @@ class TaskController extends Controller
 
     public function update(UpdateRequest $req) {
         $task = Task::find($req->id);
-        $task->fill($req->only(['name', 'status']));
+        $task->fill($req->only(['name', 'description', 'status']));
         if($req->hasFile('image') && $req->file('image')) {
             $name = uniqid() . '-' . $req->image->getClientOriginalName();
             $path = $req->image->move(storage_path('app/tasks'), $name);
             $task->image = $name;
         }
-        $task->user_id = Auth::user()->id;
+        $task->user_id = (Auth::user()->role == 'admin' && $req->user_id) ? $req->user_id : Auth::user()->id;
         $task->save();
 
         return $this->response($task);
