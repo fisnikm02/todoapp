@@ -34,6 +34,13 @@
                 </select>
               </div>
               <div class="form-group col-12">
+                <label for="">{{ $t("auth.description") }}</label>
+                <textarea
+                  v-model="row.description"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="form-group col-12">
                 <label for="">{{ $t("app.image") }}</label>
                 <input type="file" class="form-control" ref="image" @change="createImage($refs.image.files[0])">
 
@@ -75,6 +82,7 @@ export default {
 
       form.append('id', self.row.id);
       form.append('name', self.row.name);
+      form.append('description', self.row.description);
       form.append('status', self.row.status);
       form.append('user_id', self.row.user_id);
       if(this.$refs.image.files[0]) form.append('image', this.$refs.image.files[0]);

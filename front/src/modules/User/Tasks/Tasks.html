@@ -2,13 +2,6 @@
     <div>
         <div class="row d-flex justify-content-between align-items-center">
             <h3 class="col-3"><i class="fas fa-tasks"></i> My tasks</h3>
-
-            <div class="col-5 p-2 m-2 d-flex align-items-center justify-content-end">
-                <div class="d-flex mr-2">
-                    <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
-                    <button class="ml-2 btn btn-primary" @click="search"><i class="fas fa-search"></i> Search</button>
-                </div>
-            </div>
         </div>
 
         <div class="row mt-5">
@@ -20,9 +13,10 @@
                 <draggable class="mt-3 list-group" :list="todo" group="people" @change="log($event,'todo')">
                     <div class="list-group-item" v-for="(element, index) in todo" :key="'todo' + index">
                         <div class="d-flex justify-content-between align-items-center">
-                            <p>{{ index }}. {{ element.name }}</p>
+                            <h5>{{ index }}. {{ element.name }}</h5>
                             <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
                         </div>
+                        <p>{{ element.description }}</p>
                         <img id="img-task" v-if="element.image" :src="element.image" width="100%">
                     </div>
                     <div v-if="todo.length == 0">No tasks in todo!</div>
@@ -37,9 +31,10 @@
                 <draggable class="mt-3 list-group" :list="doing" group="people" @change="log($event,'doing')">
                     <div class="list-group-item" v-for="(element, index) in doing" :key="'doing' + index">
                         <div class="d-flex justify-content-between align-items-center">
-                            <p>{{ index }}. {{ element.name }}</p>
+                            <h5>{{ index }}. {{ element.name }}</h5>
                             <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
                         </div>
+                        <p>{{ element.description }}</p>
                         <img id="img-task" v-if="element.image" :src="element.image" width="100%">
                     </div>
                 </draggable>
@@ -52,9 +47,10 @@
                 <draggable class="mt-3 list-group" :list="done" group="people" @change="log($event,'done')">
                     <div class="list-group-item" v-for="(element, index) in done" :key="'done' + index">
                         <div class="d-flex justify-content-between align-items-center">
-                            <p>{{ index }}. {{ element.name }}</p>
+                            <h5>{{ index }}. {{ element.name }}</h5>
                             <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
                         </div>
+                        <p>{{ element.description }}</p>
                         <img id="img-task" v-if="element.image" :src="element.image" width="100%">
                     </div>
                 </draggable>

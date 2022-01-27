@@ -26,6 +26,13 @@
                 />
               </div>
               <div class="form-group col-12">
+                <label for="">{{ $t("auth.description") }}</label>
+                <textarea
+                  v-model="basicInfo.description"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="form-group col-12">
                 <label for="">{{ $t("app.image") }}</label>
                 <input
                   type="file"
@@ -60,7 +67,8 @@ export default {
     return {
       basicInfo: {
         name: "",
-        image: null,
+        description: "",
+        image: null
       },
     };
   },
@@ -72,6 +80,7 @@ export default {
       let form = new FormData;
 
       form.append('name', self.basicInfo.name);
+      form.append('description', self.basicInfo.description);
       if(this.$refs.image.files[0]) form.append('image', this.$refs.image.files[0])
       form.append('status', this.status)
 

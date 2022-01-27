@@ -59,6 +59,10 @@
                 />
               </div>
             </div>
+            <div class="row form-group col-12 m-0 p-0">
+              <label for="">{{ $t('auth.description') }}</label>
+              <textarea class="form-control" v-model="basicInfo.description"></textarea>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -116,6 +120,7 @@ export default {
       let form = new FormData;
 
       form.append('name', self.basicInfo.name);
+      form.append('description', self.basicInfo.description);
       form.append('status', self.basicInfo.status);
       form.append('user_id', self.basicInfo.user_id);
       if(this.$refs.image.files[0]) form.append('image', this.$refs.image.files[0]);

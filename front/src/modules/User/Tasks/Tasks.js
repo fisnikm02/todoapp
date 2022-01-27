@@ -34,7 +34,7 @@ export default {
     get: function () {
       let self = this;
 
-      self.users = [];
+      self.todo = []; self.doing = []; self.done = [];
 
       let url = this.$backendUrl + '/tasks/user/' + self.authUser.id;
       self.$http
@@ -48,6 +48,7 @@ export default {
             let row = {
               id: task.id,
               name: task.name,
+              description: task.description,
               image: task.image_url,
               status: task.status
             }
@@ -73,20 +74,6 @@ export default {
           }
         });
     },
-    search: function () {
-      this.get(this.searchInput);
-    },
-    add: function () {
-      this.list.push({ name: "Juan" });
-    },
-    replace: function () {
-      this.list = [{ name: "Edgard" }];
-    },
-    clone: function (el) {
-      return {
-        name: el.name + " cloned"
-      };
-    },
     log: function (evt, type) {
       let status = 0;
 
@@ -95,6 +82,7 @@ export default {
         let data = {
           id: evt.added.element.id,
           name: evt.added.element.name,
+          description: evt.added.element.description,
           status: status
         }
         this.$http.post(this.$backendUrl + '/tasks/update', data).then(() => {
