@@ -109,20 +109,10 @@ export default {
       self.$http
         .put(this.$backendUrl + "/users", self.row)
         .then(() => {
-          this.$router.go();
+          this.notify('success', 'User', 'User edited successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
     dtl: function () {
@@ -131,20 +121,10 @@ export default {
       self.$http
         .delete(this.$backendUrl + "/users", { data: { id: self.row.id } })
         .then(() => {
-          this.$router.go();
+          this.notify('success', 'User', 'User deleted successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     }
   },

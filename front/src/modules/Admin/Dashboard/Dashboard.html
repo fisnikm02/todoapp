@@ -6,9 +6,9 @@
                 <div class="small-box text-white bg-danger">
                     <div class="inner">
                         <h3>{{ logs.users }}</h3>
-                        <p>Users </p>
+                        <p>{{ $t('users.users') }} </p>
                     </div>
-                    <router-link :to="{ name: 'admin.users' }" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                    <router-link :to="{ name: 'admin.users' }" class="small-box-footer">{{ $t('general.more_info') }} <i class="fas fa-arrow-circle-right"></i></router-link>
                 </div>
             </div>
             <!-- ./col -->
@@ -18,9 +18,9 @@
                     <div class="inner">
                         <h3>{{ logs.admins }}</h3>
 
-                        <p>Admins</p>
+                        <p>{{ $t('users.admins') }}</p>
                     </div>
-                    <router-link :to="{ name: 'admin.users' }" class="small-box-footer">More info <i
+                    <router-link :to="{ name: 'admin.users' }" class="small-box-footer">{{ $t('general.more_info') }} <i
                             class="fas fa-arrow-circle-right"></i></router-link>
                 </div>
             </div>
@@ -31,11 +31,11 @@
                     <div class="inner">
                         <h3>{{ logs.tasks }}</h3>
 
-                        <p>Tasks</p>
+                        <p>{{ $t('tasks.tasks') }}</p>
 
                         <p>Todo: {{ logs.tasks_todo }}, Doing: {{ logs.tasks_doing }}, Done: {{ logs.tasks_done }}</p>
                     </div>
-                    <router-link :to="{ name: 'admin.tasks' }" class="small-box-footer">More info <i
+                    <router-link :to="{ name: 'admin.tasks' }" class="small-box-footer">{{ $t('general.more_info') }} <i
                             class="fas fa-arrow-circle-right"></i></router-link>
                 </div>
             </div>

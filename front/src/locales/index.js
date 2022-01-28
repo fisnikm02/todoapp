@@ -11,10 +11,18 @@ var messages = {
         navbar: require('./en/navbar.json'),
         general: require('./en/general.json'),
         auth: require('./en/auth.json'),
-        notFound: require('./en/404-not-found.json')
+        notFound: require('./en/404-not-found.json'),
+        tasks: require('./en/tasks.json'),
+        users: require('./en/users.json'),
     },
-   
-    // Other languages...
+    de: {
+        navbar: require('./de/navbar.json'),
+        general: require('./de/general.json'),
+        auth: require('./de/auth.json'),
+        notFound: require('./de/404-not-found.json'),
+        tasks: require('./de/tasks.json'),
+        users: require('./de/users.json'),
+    },
 }
 
 // Export VueI18n

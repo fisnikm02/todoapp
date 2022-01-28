@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Tasks - Edit</h5>
+          <h5 class="modal-title">{{ $t('tasks.task') }} - {{ $t('general.edit') }}</h5>
           <button
             type="button"
             class="close"
@@ -22,11 +22,11 @@
                 <input type="text" v-model="row.name" class="form-control" />
               </div>
               <div class="form-group col-12">
-                <label for="">{{ $t("auth.description") }}</label>
+                <label for="">{{ $t("tasks.description") }}</label>
                 <textarea v-model="row.description" class="form-control"></textarea>
               </div>
               <div class="form-group col-12">
-                <label for="">{{ $t("app.image") }}</label>
+                <label for="">{{ $t("tasks.image") }}</label>
                 <input type="file" class="form-control" ref="image" @change="createImage($refs.image.files[0])">
                 
                 <img v-if="image" id="img-task" :src="image" class="mt-2">
@@ -37,10 +37,10 @@
         </div>
         <div class="modal-footer">
           <button type="button" @click="save" class="btn btn-primary">
-            Save
+            {{ $t('general.save') }}
           </button>
-          <button type="button" @click="dtl" class="btn btn-danger" data-dismiss="modal">
-            Delete
+          <button type="button" @click="dtl" class="btn btn-danger">
+            {{ $t('general.delete') }}
           </button>
         </div>
       </div>
@@ -72,20 +72,10 @@ export default {
       self.$http
         .post(this.$backendUrl + "/tasks/update", form)
         .then(() => {
-          this.$router.go();
+          this.notify('success', 'Task', 'Task edited successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
     dtl: function () {
@@ -94,20 +84,10 @@ export default {
       self.$http
         .delete(this.$backendUrl + "/tasks", { data: { id: self.row.id } })
         .then(() => {
-          this.$router.go();
+          this.notify('success', 'Task', 'Task deleted successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
     createImage: function(file){

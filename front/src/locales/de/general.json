@@ -1,0 +1,17 @@
+{
+    "success": "Erfolg",
+    "error": "Error",
+    "copyright": "Urheberrechte",
+    "create_one": "Erstelle einen",
+    "logout":  "Ausloggen",
+    "logout_info": "Möchten Sie die Seite wirklich verlassen?",
+    "search": "Suche",
+    "new": "Neu",
+    "save": "Speichern",
+    "update": "Aktualisieren",
+    "create": "Erstellen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "more_info": "Mehr Info"
+}

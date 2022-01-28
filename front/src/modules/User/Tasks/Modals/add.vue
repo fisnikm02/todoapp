@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Users - New</h5>
+          <h5 class="modal-title">{{ $t('tasks.task') }} - {{ $t('general.new') }}</h5>
           <button
             type="button"
             class="close"
@@ -26,14 +26,14 @@
                 />
               </div>
               <div class="form-group col-12">
-                <label for="">{{ $t("auth.description") }}</label>
+                <label for="">{{ $t("tasks.description") }}</label>
                 <textarea
                   v-model="basicInfo.description"
                   class="form-control"
                 ></textarea>
               </div>
               <div class="form-group col-12">
-                <label for="">{{ $t("app.image") }}</label>
+                <label for="">{{ $t("tasks.image") }}</label>
                 <input
                   type="file"
                   ref="image"
@@ -49,10 +49,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" @click="add" class="btn btn-primary">
-            Save
-          </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
+            {{ $t('general.save') }}
           </button>
         </div>
       </div>
@@ -87,21 +84,10 @@ export default {
       self.$http
         .post(this.$backendUrl + "/tasks", form)
         .then(() => {
-          // console.log(res)
-          this.$router.go();
+          this.notify('success', 'Task', 'Task added successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
     createImage: function(file){

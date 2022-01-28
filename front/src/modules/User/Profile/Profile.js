@@ -33,18 +33,7 @@ export default {
             else self.count.done += 1;
           }
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
     update: function () {
@@ -55,20 +44,10 @@ export default {
         .then((res) => {
           self.$store.commit("UPDATE_LOGGED_USER", res.data);
 
-          self.$router.go();
+          this.notify('success', 'Profile', 'Profile edited successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
   },

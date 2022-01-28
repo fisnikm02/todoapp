@@ -1,12 +1,12 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
   <div>
     <div class="row d-flex justify-content-between align-items-center">
-      <h4 class="col-sm-12 col-md-4 mb-5">My Profile - {{authUser.fullname}}</h4>
+      <h4 class="col-sm-12 col-md-4 mb-5">{{ $t('users.my_profile') }} - {{authUser.fullname}}</h4>
     </div>
 
     <div class="row">
         <div class="row col-md-6">
-            <h5 class="col-12 mt-2 mb-3">My Data</h5>
+            <h5 class="col-12 mt-2 mb-3">{{ $t('users.my_data') }}</h5>
             <div class="form-group col-6">
                 <label for="">{{ $t('auth.first_name')}}</label>
                 <input type="text" class="form-control" v-model="authUser.first_name">
@@ -35,14 +35,14 @@
                 <input type="password" class="form-control" v-model="authUser.password_confirmation">
             </div>
 
-            <button class="m-2 btn btn-primary" @click="update"><i class="far fa-edit"></i> Update</button>
+            <button class="m-2 btn btn-primary" @click="update"><i class="far fa-edit"></i> {{ $t('general.update') }}</button>
         </div>
         <div class="row col-md-6">
-            <h5 class="col-12 mt-2 mb-2">My Tasks</h5>
+            <h5 class="col-12 mt-2 mb-2">{{ $t('tasks.my_tasks') }}</h5>
             
-            <div class="col-4"><p>Todo: {{ count.todo }}</p></div>
-            <div class="col-4"><p>Doing: {{ count.doing }}</p></div>
-            <div class="col-4"><p>Done: {{ count.done }}</p></div>
+            <div class="col-4"><p>{{ $t('tasks.todo') }}: {{ count.todo }}</p></div>
+            <div class="col-4"><p>{{ $t('tasks.doing') }}: {{ count.doing }}</p></div>
+            <div class="col-4"><p>{{ $t('tasks.done') }}: {{ count.done }}</p></div>
         </div>
     </div>
   </div>

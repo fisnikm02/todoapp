@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Task - New</h5>
+          <h5 class="modal-title">{{ $t('tasks.task') }} - {{ $t('general.new') }}</h5>
           <button
             type="button"
             class="close"
@@ -26,7 +26,7 @@
                 />
               </div>
               <div class="form-group col">
-                <label for="">{{ $t("app.status") }}</label>
+                <label for="">{{ $t("tasks.status") }}</label>
                 <select v-model="basicInfo.status" class="form-control">
                   <option value="0">Todo</option>
                   <option value="1">Doing</option>
@@ -36,7 +36,7 @@
             </div>
             <div class="row d-flex">
               <div class="form-group col-6">
-                <label for="">{{ $t("auth.user") }}</label>
+                <label for="">{{ $t("tasks.user") }}</label>
                 <select class="form-control" v-model="basicInfo.user_id">
                   <option value="">Choose one!</option>
                   <option v-for="user in users" :key="user.id" :value="user.id">
@@ -46,7 +46,7 @@
                 </select>
               </div>
               <div class="form-group col-6">
-                <label for="">{{ $t("app.image") }}</label>
+                <label for="">{{ $t("tasks.image") }}</label>
                 <input
                   type="file"
                   ref="image"
@@ -60,14 +60,14 @@
               </div>
             </div>
             <div class="row form-group col-12 m-0 p-0">
-              <label for="">{{ $t('auth.description') }}</label>
+              <label for="">{{ $t('tasks.description') }}</label>
               <textarea class="form-control" v-model="basicInfo.description"></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" @click="add" class="btn btn-primary">
-            Save
+            {{ $t('general.save') }}
           </button>
         </div>
       </div>
@@ -85,6 +85,7 @@ export default {
         image: null,
         status: 0,
         user_id: "",
+        description: ''
       },
     };
   },
@@ -100,18 +101,8 @@ export default {
         .then((res) => {
           self.users = res.data.data.filter((x) => x.role == 'user');
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
+          
         });
     },
     add: function () {
@@ -127,20 +118,10 @@ export default {
       self.$http
         .post(this.$backendUrl + "/tasks", form)
         .then(() => {
-          this.$router.go();
+          this.notify('success', 'Task', 'Task added successfully!')
+          this.go_after(300);
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
     createImage: function (file) {

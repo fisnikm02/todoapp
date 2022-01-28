@@ -50,3 +50,6 @@
     text-decoration: none;
     color: black;
 }
+td {
+    vertical-align: baseline !important;
+}

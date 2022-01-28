@@ -4,5 +4,14 @@
     "copyright": "Copyright",
     "create_one": "Create one",
     "logout":  "Logout",
-    "logout_info": "Are you sure you want to leave page ?"
+    "logout_info": "Are you sure you want to leave page ?",
+    "search": "Search",
+    "new": "New",
+    "save": "Save",
+    "update": "Update",
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "more_info": "More info"
 }

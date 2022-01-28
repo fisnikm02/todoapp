@@ -1,20 +1,20 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
     <div>
         <div class="row d-flex justify-content-between align-items-center">
-            <h3 class="col-3"><i class="fas fa-tasks"></i> My tasks</h3>
+            <h3 class="col-3"><i class="fas fa-tasks"></i> {{ $t('tasks.my_tasks') }}</h3>
         </div>
 
         <div class="row mt-5">
             <div class="col-md-4">
                 <div class="d-flex align-items-center">
-                    <h4>Todo</h4>
-                    <button class="ml-1 btn btn-warning" @click="status = 0; toggleModalNew()"><i class="fas fa-plus"></i> Add</button>
+                    <h4>{{ $t('tasks.todo') }}</h4>
+                    <button class="ml-1 btn btn-warning" @click="status = 0; toggleModalNew()"><i class="fas fa-plus"></i> {{ $t('general.add') }}</button>
                 </div>
                 <draggable class="mt-3 list-group" :list="todo" group="people" @change="log($event,'todo')">
                     <div class="list-group-item" v-for="(element, index) in todo" :key="'todo' + index">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5>{{ index }}. {{ element.name }}</h5>
-                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
+                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> {{ $t('general.edit') }}</button></p>
                         </div>
                         <p>{{ element.description }}</p>
                         <img id="img-task" v-if="element.image" :src="element.image" width="100%">
@@ -25,14 +25,14 @@
 
             <div class="col-md-4">
                 <div class="d-flex align-items-center">
-                    <h4>Doing</h4>
-                    <button class="ml-1 btn btn-warning" @click="status = 1; toggleModalNew()"><i class="fas fa-plus"></i> Add</button>
+                    <h4>{{ $t('tasks.doing') }}</h4>
+                    <button class="ml-1 btn btn-warning" @click="status = 1; toggleModalNew()"><i class="fas fa-plus"></i> {{ $t('general.add') }}</button>
                 </div>
                 <draggable class="mt-3 list-group" :list="doing" group="people" @change="log($event,'doing')">
                     <div class="list-group-item" v-for="(element, index) in doing" :key="'doing' + index">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5>{{ index }}. {{ element.name }}</h5>
-                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
+                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> {{ $t('general.edit') }}</button></p>
                         </div>
                         <p>{{ element.description }}</p>
                         <img id="img-task" v-if="element.image" :src="element.image" width="100%">
@@ -42,13 +42,13 @@
 
             <div class="col-md-4">
                 <div class="d-flex align-items-center">
-                    <h4>Done</h4>
+                    <h4>{{ $t('tasks.done') }}</h4>
                 </div>
                 <draggable class="mt-3 list-group" :list="done" group="people" @change="log($event,'done')">
                     <div class="list-group-item" v-for="(element, index) in done" :key="'done' + index">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5>{{ index }}. {{ element.name }}</h5>
-                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></p>
+                            <p><button class="btn btn-success p-1" @click="row = element; toggleModalEdit()"><i class="far fa-edit"></i> {{ $t('general.edit') }}</button></p>
                         </div>
                         <p>{{ element.description }}</p>
                         <img id="img-task" v-if="element.image" :src="element.image" width="100%">

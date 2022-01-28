@@ -1,0 +1,14 @@
+{
+    "all_tasks": "Alle Aufgaben",
+    "task": "Aufgabe",
+    "tasks": "Aufgaben",
+    "status": "Status",
+    "image": "Bild",
+    "description": "Bezeichnung",
+    "user": "Nutzer",
+    "add": "Hinzufügen",
+    "todo": "Machen",
+    "doing": "Tun",
+    "done": "Fertig",
+    "my_tasks": "Meine Aufgaben"
+}

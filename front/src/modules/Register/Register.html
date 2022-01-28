@@ -6,13 +6,13 @@
       <div
         class="form col-md-6 d-flex align-items-center justify-content-center rounded"
         style="
-          background: url(https://source.unsplash.com/IXUM4cJynP0) no-repeat;
-          background-size: 100%;
+          background: url(https://wallpapercave.com/wp/wp9764093.jpg) no-repeat;
+          background-size: cover;
           height: 500px;
         "
       >
         <div class="bg-white w-75 p-4 rounded">
-          <h3>Sign Up</h3>
+          <h3>{{ $t('auth.sign_up')}}</h3>
           <form>
             <div class="row d-flex justify-content-between">
               <div class="form-group col">
@@ -72,9 +72,9 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <button type="button" class="btn btn-primary" @click="register()">
-                Register <i class="fas fa-sign-in-alt"></i>
+                {{ $t('auth.register') }} <i class="fas fa-sign-in-alt"></i>
               </button>
-              <router-link :to="{ name: 'login' }">Login now!</router-link>
+              <router-link :to="{ name: 'login' }">{{ $t('auth.login_now') }}</router-link>
             </div>
           </form>
         </div>

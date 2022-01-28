@@ -1,15 +1,15 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
     <div>
         <div class="row d-flex justify-content-between align-items-center">
-            <h3 class="col-sm-12 col-md-3">Tasks</h3>
+            <h3 class="col-sm-12 col-md-3">{{ $t('tasks.tasks') }}</h3>
              
             <div class="col-sm-12 col-md-5 p-2 m-2 row d-flex align-items-center justify-content-end">
                 <div class="col-sm-12 col-md-9 d-flex">
                     <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
-                    <button class="ml-2 btn btn-primary" @click="search"><i class="fas fa-search"></i> Search</button>
+                    <button class="ml-2 btn btn-primary" @click="search"><i class="fas fa-search"></i> {{ $t('general.search') }}</button>
                 </div>
                 <div class="col-sm-12 col-md-3 d-flex justify-content-end mt-2 mt-md-0">
-                    <button class="btn btn-warning" @click="toggleModalNew"><i class="fas fa-plus"></i> Add Task</button>
+                    <button class="btn btn-warning" @click="toggleModalNew"><i class="fas fa-plus"></i> {{ $t('tasks.add') }} {{ $t('tasks.task') }}</button>
                 </div>
             </div>
         </div>
@@ -17,11 +17,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                    <th>User</th>
+                    <th>{{ $t('auth.id') }}</th>
+                    <th>{{ $t('auth.name') }}</th>
+                    <th>{{ $t('tasks.image') }}</th>
+                    <th>{{ $t('tasks.status') }}</th>
+                    <th>{{ $t('tasks.user') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +32,9 @@
                     <td><img id="img-task-table" :src="task.image_url ? task.image_url : image('no-image.jpg')"></td>
                     <td>{{ (task.status == 0) ? 'todo' : ((task.status == 1) ? 'doing' : 'done') }}</td>
                     <td>{{ task.user_id }}</td>
-                    <td><button type="button" class="btn btn-primary" @click="row = task; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" @click="row = task; toggleModalEdit()"><i class="far fa-edit"></i> {{ $t('general.edit') }}</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

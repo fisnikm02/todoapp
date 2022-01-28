@@ -5,14 +5,14 @@
         </li>
     </nav>
     <nav v-if="authUser.role == 'admin'">
-        <li><router-link :to="{ name: 'admin.dashboard' }"><i class="fas fa-home"></i> Home</router-link></li>
-        <li><router-link :to="{ name: 'admin.tasks' }"><i class="fas fa-tasks"></i> Tasks</router-link></li>
-        <li><router-link :to="{ name: 'admin.users' }"><i class="fas fa-users"></i> Users</router-link></li>
-        <li><router-link :to="{ name: 'admin.profile' }"><i class="fas fa-user"></i> Profile</router-link></li>
+        <li><router-link :to="{ name: 'admin.dashboard' }"><i class="fas fa-home"></i> {{ $t('navbar.dashboard') }}</router-link></li>
+        <li><router-link :to="{ name: 'admin.tasks' }"><i class="fas fa-tasks"></i> {{ $t('navbar.tasks') }}</router-link></li>
+        <li><router-link :to="{ name: 'admin.users' }"><i class="fas fa-users"></i> {{ $t('navbar.users') }}</router-link></li>
+        <li><router-link :to="{ name: 'admin.profile' }"><i class="fas fa-user"></i> {{ $t('navbar.profile') }}</router-link></li>
     </nav>
     <nav v-else>
-        <li><router-link :to="{ name: 'user.dashboard' }"><i class="fas fa-home"></i> Home</router-link></li>
-        <li><router-link :to="{ name: 'user.tasks' }"><i class="fas fa-tasks"></i> Tasks</router-link></li>
-        <li><router-link :to="{ name: 'user.profile' }"><i class="fas fa-user"></i> Profile</router-link></li>
+        <li><router-link :to="{ name: 'user.dashboard' }"><i class="fas fa-home"></i> {{ $t('navbar.dashboard') }}</router-link></li>
+        <li><router-link :to="{ name: 'user.tasks' }"><i class="fas fa-tasks"></i> {{ $t('navbar.tasks') }}</router-link></li>
+        <li><router-link :to="{ name: 'user.profile' }"><i class="fas fa-user"></i> {{ $t('navbar.profile') }}</router-link></li>
     </nav>
 </div>

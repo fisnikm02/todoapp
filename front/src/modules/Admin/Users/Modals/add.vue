@@ -111,20 +111,10 @@ export default {
       self.$http
         .post(this.$backendUrl + "/users", self.basicInfo)
         .then(() => {
-          this.$router.go();
+          this.notify('success', 'User', 'User added successfully');
+          this.go_after(300)
         })
-        .catch((error) => {
-          try {
-            if (error.response.status == 422) {
-              for (var errorKey in error.response.data.errors) {
-                if (errorKey in self.errors) {
-                  self.errors[errorKey] = true;
-                }
-              }
-            }
-          } catch (e) {
-            console.log(e);
-          }
+        .catch(() => {
         });
     },
   },

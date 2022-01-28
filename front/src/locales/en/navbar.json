@@ -1,4 +1,8 @@
 {
     "dashboard": "Dashboard",
-    "other_menu": "Other Menu"
+    "other_menu": "Other Menu",
+    "tasks": "Tasks",
+    "users": "Users",
+    "profile": "Profile",
+    "logout": "Log out"
 }

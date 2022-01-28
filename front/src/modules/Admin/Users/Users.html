@@ -1,15 +1,15 @@
 <adminLayout v-bind:activeMenu="'adminDashboard'">
     <div>
         <div class="row d-flex justify-content-between align-items-center">
-            <h3 class="col-sm-12 col-md-3">Users</h3>
+            <h3 class="col-sm-12 col-md-3">{{ $t('users.users') }}</h3>
              
             <div class="col-sm-12 col-md-5 p-2 m-2 row d-flex align-items-center justify-content-end">
                 <div class="col-sm-12 col-md-9 d-flex">
                     <input type="search" placeholder="Search by name" class="col form-control" v-model="searchInput">
-                    <button class="ml-2 btn btn-primary" @click="search"><i class="fas fa-search"></i> Search</button>
+                    <button class="ml-2 btn btn-primary" @click="search"><i class="fas fa-search"></i> {{ $t('general.search') }}</button>
                 </div>
                 <div class="col-sm-12 col-md-3 d-flex justify-content-end mt-2 mt-md-0">
-                    <button class="btn btn-warning" @click="toggleModalNew"><i class="fas fa-plus"></i> Add User</button>
+                    <button class="btn btn-warning" @click="toggleModalNew"><i class="fas fa-plus"></i> {{ $t('general.add') }} {{ $t('users.user') }}</button>
                 </div>
             </div>
         </div>
@@ -17,11 +17,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>Role</th>
+                    <th>{{ $t('auth.id') }}</th>
+                    <th>{{ $t('auth.name') }}</th>
+                    <th>{{ $t('auth.email') }}</th>
+                    <th>{{ $t('auth.gender') }}</th>
+                    <th>{{ $t('auth.role') }}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.gender }}</td>
                     <td>{{ user.role }}</td>
-                    <td><button type="button" class="btn btn-primary" @click="row = user; toggleModalEdit()"><i class="far fa-edit"></i> Edit</button></td>
+                    <td><button type="button" class="btn btn-primary" @click="row = user; toggleModalEdit()"><i class="far fa-edit"></i> {{ $t('general.edit') }}</button></td>
                 </tr>
             </tbody>
         </table>

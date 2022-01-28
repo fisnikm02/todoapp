@@ -2,7 +2,7 @@
   <div id="app">
     <loader-component v-if="displayLoader" />
 
-    <notifications group="notify" class="notify" />
+    <notifications group="notify" class="mt-2 notify" />
 
     <router-view />
   </div>

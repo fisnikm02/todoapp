@@ -2,10 +2,10 @@
     <div class="w-100 d-flex justify-content-center">
 
         <div class="w-75 row d-flex align-items-center justify-content-center mt-5">
-            <div class="form col-md-6 d-flex align-items-center justify-content-center rounded" style="background: url(https://source.unsplash.com/IXUM4cJynP0) no-repeat;background-size: 100%;height: 500px;">
+            <div class="form col-md-6 d-flex align-items-center justify-content-center rounded" style="background: url(https://wallpapercave.com/wp/wp9764093.jpg) no-repeat;background-size: cover;height: 500px;">
                 <div class="bg-white w-75 p-4 rounded">
 
-                    <h3>Sign in</h3>
+                    <h3>{{ $t('auth.sign_in') }}</h3>
                     <form action="#" method="POST">
                         <div class="form-group">
                             <label for="email">{{ $t('auth.email') }}</label>
@@ -17,8 +17,8 @@
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn btn-primary" @click="login()">Login <i class="fas fa-sign-in-alt"></i></button>
-                            <router-link :to="{ name: 'register' }">Register now!</router-link>
+                            <button type="button" class="btn btn-primary" @click="login()">{{ $t('auth.login') }} <i class="fas fa-sign-in-alt"></i></button>
+                            <router-link :to="{ name: 'register' }">{{ $t('auth.register_now') }}</router-link>
                         </div>
     
                     </form>
