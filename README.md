@@ -1,5 +1,5 @@
-# todoapp
-Todo - Laravel - VueJs
+# Todo app
+## Todo - Laravel - VueJs
 
 
 ## Installation - Front
